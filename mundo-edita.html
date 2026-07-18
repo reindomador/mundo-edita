@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundo Edita</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.6;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #667eea;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    h2 {
+      color: #764ba2;
+    }
+    h3 {
+      color: #555;
+      margin: 20px 0 10px;
+    }
+    .highlight {
+      color: white;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px;
+      margin: 30px 0;
+      font-size: 1.3em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: #f9f9f9;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .social-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .social-links a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 2px solid #667eea;
+      border-radius: 25px;
+      transition: all 0.3s;
+    }
+    .social-links a:hover {
+      background: #667eea;
+      color: white;
+    }
+    ul {
+      margin-left: 40px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .registration-form {
+      margin: 30px 0;
+      padding: 30px;
+      background: #f9f9f9;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    #message {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="logo-mundo-edita.png.png" alt="Logo Mundo Edita" class="logo">
+      <h1>Mundo Edita</h1>
+      <a href="https://www.mundodigital.com.br/" style="color: #667eea; text-decoration: none;">Mundo Digital</a>
+    </div>
+    
+    <h3 style="color: #666; font-size: 1.1em; text-align: justify;">Mundo Edita es una plataforma de aprendizaje online que ofrece cursos, como tambien aulas online para personas que les gustaria empezar a aprender algo nuevo o mejor lo que nosotros hacemos es enseñar todo lo basico de edicion lo cual si el quiere puede segir teniendo clases pero mas avanzadas</h3>
+
+    <div class="social-links">
+      <a href="https://www.instagram.com/reindomador/">Facebook</a>
+      <a href="https://www.tiktok.com/@rein.domador">TikTok</a>
+    </div>
+
+    <h3>Mejores Estudiantes</h3>
+    <ul>
+      <li>clain</li>
+      <li>Lloyd</li>
+    </ul>
+
+    <table>
+      <thead>
+        <tr> 
+          <th>Persona</th>
+          <th>Edad</th>
+          <th>Género</th>
+          <th>Progreso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>clain</td>
+          <td>20</td>
+          <td>Masculino</td>
+          <td>89%</td>
+        </tr> 
+        <tr>
+          <td>Lloyd</td>
+          <td>25</td>
+          <td>Masculino</td>
+          <td>85%</td>
+        </tr>     
+      </tbody>
+    </table>
+    
+    <h1 class="highlight">Estamos Iniciando Cupos Para Todos En El Mes De Agosto</h1>
+
+    <div class="registration-form">
+      <h2>Regístrate Aquí</h2>
+      <form id="registrationForm">
+        <div class="form-group">
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Número de Teléfono:</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <button type="submit">Registrarse</button>
+      </form>
+      <div id="message"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      document.getElementById('message').innerHTML = `<p style="color: #4CAF50; font-weight: bold; font-size: 1.1em;">Gracias ${name}! Te has registrado exitosamente. Cualquier duda contacta con el soporte, te contactaremos en ${phone}. ¡Ten un buen día!</p>`;
+      this.reset();
+    });
+  </script>
+</body>
+</html>
