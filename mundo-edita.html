@@ -1,178 +1,480 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mundo Edita</title>
   <style>
+    :root {
+      --color-primario: #667eea;
+      --color-secundario: #764ba2;
+      --fuente-marca: 'Arial', sans-serif;
+      --color-texto: #333;
+      --color-blanco: #ffffff;
+      --sombra: 0 10px 40px rgba(0, 0, 0, 0.2);
+      --sombra-suave: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --radio-borde: 20px;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: var(--fuente-marca);
+      background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
       min-height: 100vh;
-      padding: 20px;
       line-height: 1.6;
-      color: #333;
+      color: var(--color-texto);
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    }
+
     .header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .logo {
-      width: 170px;
-      height: 170px;
-      border-radius: 60%;
-      object-fit: cover;
-      margin-bottom: 40px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    h1 {
-      color: #667eea;
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    h2 {
-      color: #764ba2;
-    }
-    h3 {
-      color: #555;
-      margin: 20px 0 10px;
-    }
-    .highlight {
-      color: white;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 15px;
-      text-align: center;
-      border-radius: 10px;
-      margin: 30px 0;
-      font-size: 1.3em;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      background: #f9f9f9;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 12px;
-      text-align: left;
-    }
-    th {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-    .social-links {
       display: flex;
-      gap: 100px;
-      justify-content: center;
-      margin: 40px 0;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: var(--color-blanco);
+      box-shadow: var(--sombra-suave);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .social-links a {
-      color: #667eea;
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: var(--sombra-suave);
+    }
+
+    .brand-name {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: var(--color-primario);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-primario);
       text-decoration: none;
       font-weight: bold;
       padding: 10px 20px;
-      border: 2px solid #667eea;
+      border: 2px solid transparent;
       border-radius: 25px;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
     }
-    .social-links a:hover {
-      background: #667eea;
-      color: white;
+
+    .nav-links a:hover {
+      border-color: var(--color-primario);
+      background: var(--color-primario);
+      color: var(--color-blanco);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
     }
-    ul {
-      margin-left: 40px;
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+      color: var(--color-blanco);
+    }
+
+    .hero h1 {
+      font-size: 3.5em;
       margin-bottom: 20px;
-      text-align: left;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
+
+    .hero p {
+      font-size: 1.3em;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      opacity: 0.95;
+    }
+
+    .hero-btn {
+      background: var(--color-blanco);
+      color: var(--color-primario);
+      padding: 15px 40px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5em;
+      color: var(--color-blanco);
+      margin-bottom: 50px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--color-blanco);
+      border-radius: var(--radio-borde);
+      overflow: hidden;
+      box-shadow: var(--sombra-suave);
+      transition: all 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+    }
+
+    .card-content {
+      padding: 25px;
+    }
+
+    .card-title {
+      font-size: 1.5em;
+      color: var(--color-primario);
+      margin-bottom: 10px;
+    }
+
+    .card-description {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .card-btn {
+      background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+      color: var(--color-blanco);
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .card-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.5);
+    }
+
+    .registration-section {
+      margin-top: 80px;
+      background: var(--color-blanco);
+      padding: 50px;
+      border-radius: var(--radio-borde);
+      box-shadow: var(--sombra);
+    }
+
     .registration-form {
-      margin: 30px 0;
-      padding: 30px;
-      background: #f9f9f9;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-top: 30px;
     }
+
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       text-align: left;
     }
+
     label {
       display: block;
       margin-bottom: 8px;
       font-weight: bold;
       color: #555;
     }
+
     input {
       width: 100%;
-      padding: 12px;
+      padding: 15px;
       border: 2px solid #ddd;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1em;
-      transition: border-color 0.3s;
+      transition: all 0.3s ease;
     }
+
     input:focus {
       outline: none;
-      border-color: #667eea;
+      border-color: var(--color-primario);
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
     }
-    button {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 12px 30px;
+
+    .submit-btn {
+      background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+      color: var(--color-blanco);
+      padding: 15px 40px;
       border: none;
-      border-radius: 25px;
+      border-radius: 30px;
       cursor: pointer;
-      font-size: 1.1em;
+      font-size: 1.2em;
       font-weight: bold;
-      transition: transform 0.2s;
+      transition: all 0.3s ease;
+      width: 100%;
     }
-    button:hover {
-      transform: scale(1.05);
+
+    .submit-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
     }
+
     #message {
-      margin-top: 20px;
+      margin-top: 25px;
       text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 40px 0;
+      background: var(--color-blanco);
+      border-radius: var(--radio-borde);
+      overflow: hidden;
+      box-shadow: var(--sombra-suave);
+    }
+
+    th,
+    td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+      color: var(--color-blanco);
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background: #f8f9fa;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      margin: 50px 0;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      color: var(--color-blanco);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 15px 30px;
+      border: 2px solid var(--color-blanco);
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--color-blanco);
+      color: var(--color-primario);
+      transform: translateY(-3px);
+    }
+
+    ul {
+      margin-left: 40px;
+      margin-bottom: 20px;
+      text-align: left;
+      color: var(--color-blanco);
+    }
+
+    .highlight-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: var(--radio-borde);
+      margin: 50px 0;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .highlight-section h2 {
+      color: var(--color-blanco);
+      font-size: 2em;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 2em;
+      }
+
+      .hero p {
+        font-size: 1.1em;
+      }
+
+      .catalogo {
+        grid-template-columns: 1fr;
+      }
+
+      .registration-section {
+        padding: 30px 20px;
+      }
+
+      .section-title {
+        font-size: 1.8em;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <div class="header">
+  <header class="header">
+    <div class="logo-container">
       <img src="logo-mundo-edita.png.png" alt="Logo Mundo Edita" class="logo">
-      <h1>Mundo Edita</h1>
-      <a href="https://www.mundodigital.com.br/" style="color: #667eea; text-decoration: none;">Mundo Digital</a>
+      <span class="brand-name">Mundo Edita</span>
     </div>
-    
-    <h3 style="color: #666; font-size: 1.1em; text-align: justify;">Mundo Edita es una plataforma de aprendizaje online que ofrece cursos, como tambien aulas online para personas que les gustaria empezar a aprender algo nuevo o mejor lo que nosotros hacemos es enseñar todo lo basico de edicion lo cual si el quiere puede segir teniendo clases pero mas avanzadas</h3>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="inicio">
+    <h1>Aprende Edición de Vídeo</h1>
+    <p>Mundo Edita es una plataforma de aprendizaje online que ofrece cursos y aulas online para personas que les
+      gustaría empezar a aprender algo nuevo o mejorar lo que ya saben. Enseñamos todo lo básico de edición para que
+      puedas seguir avanzando.</p>
+    <a href="#cursos" style="text-decoration: none;"><button class="hero-btn">Ver Cursos</button></a>
+  </section>
+
+  <div class="container">
+    <section id="cursos">
+      <h2 class="section-title">Nuestros Cursos</h2>
+      <div class="catalogo">
+        <div class="card">
+          <div class="card-image"></div>
+          <div class="card-content">
+            <h3 class="card-title">Edición Básica</h3>
+            <p class="card-description">Aprende los fundamentos de la edición de vídeo: cortes, transiciones, texto
+              básico y más. Perfecto para principiantes.</p>
+            <button class="card-btn">Inscribirse</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+          <div class="card-content">
+            <h3 class="card-title">Efectos Visuales</h3>
+            <p class="card-description">Descubre cómo crear efectos impresionantes, transiciones profesionales y
+              animaciones para tus vídeos.</p>
+            <button class="card-btn">Inscribirse</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+          <div class="card-content">
+            <h3 class="card-title">Colorización</h3>
+            <p class="card-description">Domina el arte del color grading y transforma tus vídeos con paletas
+              profesionales y ambientaciones.</p>
+            <button class="card-btn">Inscribirse</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+          <div class="card-content">
+            <h3 class="card-title">Motion Graphics</h3>
+            <p class="card-description">Crea animaciones de texto, logos y gráficos dinámicos para dar vida a tus
+              proyectos.</p>
+            <button class="card-btn">Inscribirse</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+          <div class="card-content">
+            <h3 class="card-title">Audio Profesional</h3>
+            <p class="card-description">Aprende a editar, mezclar y masterizar audio para que tus vídeos suenen como
+              profesionales.</p>
+            <button class="card-btn">Inscribirse</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);"></div>
+          <div class="card-content">
+            <h3 class="card-title">Edición Avanzada</h3>
+            <p class="card-description">Técnicas avanzadas para editores experimentale como lo son composición, efectos 3D y
+              workflow profesional.</p>
+            <button class="card-btn">Inscribirse</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div class="social-links">
-      <a href="https://www.instagram.com/reindomador/">instagram</a>
+      <a href="https://www.instagram.com/reindomador/">Instagram</a>
       <a href="https://www.tiktok.com/@rein.domador">TikTok</a>
     </div>
 
-    <h3>Mejores Estudiantes</h3>
+    <h2 class="section-title">Mejores Estudiantes</h2>
     <ul>
-      <li>clain</li>
+      <li>Clain</li>
       <li>Lloyd</li>
     </ul>
 
     <table>
       <thead>
-        <tr> 
+        <tr>
           <th>Persona</th>
           <th>Edad</th>
           <th>Género</th>
@@ -181,47 +483,55 @@
       </thead>
       <tbody>
         <tr>
-          <td>clain</td>
+          <td>Clain</td>
           <td>20</td>
           <td>Masculino</td>
           <td>89%</td>
-        </tr> 
+        </tr>
         <tr>
           <td>Lloyd</td>
           <td>25</td>
           <td>Masculino</td>
           <td>85%</td>
-        </tr>     
+        </tr>
       </tbody>
     </table>
-    
-    <h1 class="highlight">Estamos Iniciando Cupos Para Todos En El Mes De Agosto</h1>
 
-    <div class="registration-form">
-      <h2>Regístrate Aquí</h2>
-      <form id="registrationForm">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="phone">Número de Teléfono:</label>
-          <input type="tel" id="phone" name="phone" required>
-        </div>
-        <button type="submit">Registrarse</button>
-      </form>
-      <div id="message"></div>
+    <div class="highlight-section">
+      <h2>Estamos Iniciando Cupos Para Todos En El Mes De Agosto</h2>
+    </div>
+
+    <div class="registration-section">
+      <h2 style="text-align: center; color: var(--color-primario); margin-bottom: 10px;">Regístrate Aquí</h2>
+      <p style="text-align: center; color: #666; margin-bottom: 30px;"</p>
+      <div class="registration-form">
+        <form id="registrationForm">
+          <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name">
+          </div>
+          <div class="form-group">
+            <label for="phone">Número de Teléfono:</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          <button type="submit" class="submit-btn">Registrarse</button>
+        </form>
+        <div id="message"></div>
+      </div>
     </div>
   </div>
 
   <script>
-    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    document.getElementById('registrationForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
       const phone = document.getElementById('phone').value;
-      document.getElementById('message').innerHTML = `<p style="color: #4CAF50; font-weight: bold; font-size: 1.1em;">Gracias ${name}! Te has registrado exitosamente. Cualquier duda contacta con el soporte, te contactaremos en ${phone}. ¡Ten un buen día!</p>`;
+      const messageDiv = document.getElementById('message');
+      messageDiv.className = 'success-message';
+      messageDiv.innerHTML = `<p style="font-weight: bold; font-size: 1.1em;">Gracias ${name}! Te has registrado exitosamente cualquier duda contactanos en el soporte te contactaremos en ${phone} Ten un buen día :V </p>`;
       this.reset();
     });
   </script>
 </body>
+
 </html>
