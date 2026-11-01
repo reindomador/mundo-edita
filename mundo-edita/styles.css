@@ -936,21 +936,51 @@ li {
 
   .header {
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .logo {
+    width: 65px;
+    height: 65px;
   }
 
   .nav-links {
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     text-align: center;
+    width: 100%;
+  }
+
+  .nav-links li {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .nav-links .tab-btn {
+    width: 80%;
+    margin: 0 auto;
+    padding: 8px 20px;
+    font-size: 0.9em;
+  }
+
+  .hero {
+    padding: 60px 15px;
   }
 
   .hero h1 {
-    font-size: 3em;
+    font-size: 2.2em;
+    margin-bottom: 15px;
   }
 
   .hero p {
+    font-size: 0.95em;
+    margin-bottom: 25px;
+    padding: 0 10px;
+  }
+
+  .hero-btn {
+    padding: 14px 35px;
     font-size: 1.1em;
   }
 
@@ -963,11 +993,11 @@ li {
   }
 
   .section-title {
-    font-size: 2em;
+    font-size: 1.8em;
   }
 
   .section-title-small {
-    font-size: 1.8em;
+    font-size: 1.6em;
   }
 
   .highlight-section {
@@ -975,12 +1005,12 @@ li {
   }
 
   .highlight-section h2 {
-    font-size: 1.6em;
+    font-size: 1.4em;
   }
 
   .curso-destacado {
     padding: 20px;
-    gap: 25px;
+    gap: 20px;
   }
 
   .curso-destacado-precio {
@@ -1023,4 +1053,51 @@ li {
   .card-btn {
     width: 100%;
   }
+}
+
+/* ---------- Pestañas del sitio (Inicio / Cursos / Contacto) ---------- */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.activo {
+  display: block;
+}
+
+.nav-links .tab-btn {
+  font-family: var(--fuente-texto);
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--color-primario);
+  background: transparent;
+  padding: 10px 25px;
+  border: 2px solid var(--color-primario);
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.nav-links .tab-btn:hover {
+  background: var(--color-primario);
+  color: var(--fondo-oscuro);
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-neon-azul);
+}
+
+.nav-links .tab-btn.activo {
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+  border-color: transparent;
+  color: var(--fondo-oscuro);
+  box-shadow: var(--sombra-neon-mix);
+}
+
+/* Botones que antes eran enlaces (ahora son <button>) */
+.curso-inscribirse-btn,
+.curso-ver-mas-btn {
+  font-family: var(--fuente-texto);
+  cursor: pointer;
+}
+
+.curso-inscribirse-btn {
+  border: none;
 }

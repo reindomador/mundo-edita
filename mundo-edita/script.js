@@ -1,244 +1,175 @@
-
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Mundo Edita: JavaScript conectado correctamente.");
-
-    // Aquí agregaremos las funciones interactivas
-    // de los cursos, botones, estudiantes y anuncios.
-});
-
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Mundo Edita está funcionando.");
-
-    iniciarMenu();
+    iniciarTabs();
     iniciarCursos();
+    iniciarRegistro();
     iniciarEstudiantes();
     iniciarAnuncios();
-    iniciarValidaciones();
     iniciarAnimaciones();
 });
 
 
-// 1. MENU
-function iniciarMenu() {
-    const enlaces = document.querySelectorAll('.nav-links a, .hero-link, .curso-ver-mas-btn');
+// 1. PESTAÑAS DEL SITIO (Inicio / Cursos / Contacto)
+function mostrarTabSitio(nombre, sinScroll) {
+    document.querySelectorAll(".tab-panel").forEach(function (panel) {
+        panel.classList.toggle("activo", panel.dataset.panel === nombre);
+    });
 
-    enlaces.forEach(function (enlace) {
-        enlace.addEventListener("click", function (e) {
-            const destino = document.querySelector(enlace.getAttribute("href"));
+    document.querySelectorAll(".nav-links .tab-btn").forEach(function (boton) {
+        boton.classList.toggle("activo", boton.dataset.tab === nombre);
+    });
 
-            if (destino) {
-                e.preventDefault();
+    if (!sinScroll) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+}
 
-                destino.scrollIntoView({
-                    behavior: "smooth"
-                });
+// Se expone para que el chatbot pueda cambiar de pestaña
+window.mostrarTabSitio = mostrarTabSitio;
+
+function iniciarTabs() {
+    document.querySelectorAll("[data-tab]").forEach(function (elemento) {
+        elemento.addEventListener("click", function () {
+            mostrarTabSitio(elemento.dataset.tab, !!elemento.dataset.scroll);
+
+            if (elemento.dataset.scroll) {
+                const destino = document.getElementById(elemento.dataset.scroll);
+                if (destino) {
+                    setTimeout(function () {
+                        destino.scrollIntoView({ behavior: "smooth" });
+                    }, 50);
+                }
             }
         });
     });
 }
 
 
-// 2. CURSOS
+// 2. CURSOS (los botones "Inscribirse" llevan a Contacto)
 function iniciarCursos() {
-    const botones = document.querySelectorAll(".card-btn");
-
-    botones.forEach(function (boton) {
+    document.querySelectorAll(".card-btn").forEach(function (boton) {
         boton.addEventListener("click", function () {
             const tarjeta = boton.closest(".card");
             const titulo = tarjeta.querySelector(".card-title").textContent;
 
-            document.getElementById("message").textContent =
-                "Te interesa el curso de " + titulo +
-                ". Completa tus datos para continuar.";
+            mostrarTabSitio("contacto", true);
 
-            document.getElementById("registro").scrollIntoView({
-                behavior: "smooth"
-            });
+            const mensaje = document.getElementById("message");
+            if (mensaje) {
+                mensaje.textContent =
+                    "Te interesa el curso de " + titulo + ". Completa tus datos para continuar.";
+                mensaje.style.color = "var(--color-primario)";
+            }
+
+            const registro = document.getElementById("registro");
+            if (registro) {
+                setTimeout(function () {
+                    registro.scrollIntoView({ behavior: "smooth" });
+                }, 50);
+            }
         });
     });
 }
 
 
-// 3. ESTUDIANTES
-
-function iniciarEstudiantes() {
-    const tabla = document.querySelector("table tbody");
-
-    if (!tabla) {
-        return;
-    }
-
-    // Recuperar los estudiantes guardados
-    let estudiantes = JSON.parse(localStorage.getItem("estudiantesMundoEdita")) || [];
-
-    // Guardar los estudiantes
-    function guardarEstudiantes() {
-        localStorage.setItem("estudiantesMundoEdita", JSON.stringify(estudiantes));
-    }
-
-    // Mostrar los estudiantes en la tabla
-    function mostrarEstudiantes() {
-        // Quitar las filas anteriores
-        tabla.innerHTML = "";
-
-        estudiantes.forEach(function (estudiante, indice) {
-            const fila = document.createElement("tr");
-
-            [estudiante.nombre, estudiante.edad, estudiante.genero, estudiante.progreso + "%"]
-                .forEach(function (dato) {
-                    const celda = document.createElement("td");
-                    celda.textContent = dato;
-                    fila.appendChild(celda);
-                });
-
-            const celdaAcciones = document.createElement("td");
-            const botonEliminar = document.createElement("button");
-
-            botonEliminar.textContent = "Eliminar";
-            botonEliminar.type = "button";
-
-            botonEliminar.addEventListener("click", function () {
-                if (confirm("¿Quieres eliminar a " + estudiante.nombre + "?")) {
-                    estudiantes.splice(indice, 1);
-                    guardarEstudiantes();
-                    mostrarEstudiantes();
-                }
-            });
-
-            celdaAcciones.appendChild(botonEliminar);
-            fila.appendChild(celdaAcciones);
-            tabla.appendChild(fila);
-        });
-    }
-
-    // Crear el botón para agregar estudiantes
-    const botonAgregar = document.createElement("button");
-    botonAgregar.textContent = "Agregar estudiante";
-    botonAgregar.type = "button";
-    botonAgregar.className = "submit-btn";
-
-    tabla.closest("table").before(botonAgregar);
-
-    botonAgregar.addEventListener("click", function () {
-        const nombre = prompt("Nombre del estudiante:");
-        if (nombre === null || nombre.trim() === "") {
-            return;
-        }
-
-        const edad = prompt("Edad del estudiante:");
-        if (edad === null || !Number.isInteger(Number(edad)) ||
-            Number(edad) < 1 || Number(edad) > 120) {
-            alert("Escribe una edad válida.");
-            return;
-        }
-
-        const genero = prompt("Género del estudiante:");
-        if (genero === null || genero.trim() === "") {
-            return;
-        }
-
-        const progreso = prompt("Progreso del 0 al 100:");
-        if (progreso === null || progreso.trim() === "" ||
-            !Number.isFinite(Number(progreso)) ||
-            Number(progreso) < 0 || Number(progreso) > 100) {
-            alert("Escribe un progreso entre 0 y 100.");
-            return;
-        }
-
-        estudiantes.push({
-            nombre: nombre.trim(),
-            edad: Number(edad),
-            genero: genero.trim(),
-            progreso: Number(progreso)
-        });
-
-        guardarEstudiantes();
-        mostrarEstudiantes();
-
-        alert("Estudiante guardado correctamente.");
-    });
-
-    // Mostrar los datos guardados al abrir la página
-    mostrarEstudiantes();
-}
-
-
-
-// 4. ANUNCIOS
-function iniciarAnuncios() {
-    const anuncio = document.querySelector(".highlight-section");
-
-    if (anuncio) {
-        anuncio.style.cursor = "pointer";
-
-        anuncio.addEventListener("click", function () {
-            alert(
-                "¡Tenemos información sobre nuestros cursos! " +
-                "Si deseas inscribirte, completa el formulario de registro."
-            );
-        });
-    }
-}
-
-
-// 5. VALIDACIONES DEL FORMULARIO
-function iniciarValidaciones() {
+// 3. FORMULARIO DE REGISTRO CON VALIDACIONES
+function iniciarRegistro() {
     const formulario = document.getElementById("registrationForm");
-    const nombre = document.getElementById("name");
-    const telefono = document.getElementById("phone");
+    if (!formulario) return;
+
+    const nombreInput = document.getElementById("name");
+    const telefonoInput = document.getElementById("phone");
     const mensaje = document.getElementById("message");
 
     formulario.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const nombreIngresado = nombre.value.trim();
-        const telefonoIngresado = telefono.value.trim();
+        const nombreIngresado = nombreInput.value.trim();
+        const telefonoIngresado = telefonoInput.value.trim();
         const numeros = telefonoIngresado.replace(/\D/g, "");
 
         if (nombreIngresado === "") {
             mensaje.textContent = "Por favor, escribe tu nombre.";
-            mensaje.style.color = "red";
-            nombre.focus();
+            mensaje.style.color = "#ff4d4d";
+            nombreInput.focus();
             return;
         }
 
         if (!/^[a-záéíóúüñ\s'-]+$/i.test(nombreIngresado)) {
             mensaje.textContent = "Escribe un nombre válido.";
-            mensaje.style.color = "red";
-            nombre.focus();
+            mensaje.style.color = "#ff4d4d";
+            nombreInput.focus();
             return;
         }
 
         if (!/^[0-9+\s()-]+$/.test(telefonoIngresado) ||
             numeros.length < 7 || numeros.length > 15) {
             mensaje.textContent = "Escribe un número de teléfono válido.";
-            mensaje.style.color = "red";
-            telefono.focus();
+            mensaje.style.color = "#ff4d4d";
+            telefonoInput.focus();
             return;
         }
 
-        mensaje.style.color = "green";
-        mensaje.textContent =
-            "¡Gracias, " + nombreIngresado +
-            "! Tu registro se validó correctamente. " +
-            "Te contactaremos al número " + telefonoIngresado + ".";
+        mensaje.className = "success-message";
+        mensaje.style.color = "#00ff88";
+        mensaje.innerHTML = `<p class="success-text">Gracias ${nombreIngresado}! Te has registrado exitosamente cualquier duda contactanos en el soporte te contactaremos en ${telefonoIngresado} Ten un buen día :V </p>`;
 
-        formulario.reset();
+        this.reset();
     });
+}
+
+
+// 4. ESTUDIANTES (Lista fija)
+function iniciarEstudiantes() {
+    const tabla = document.querySelector("table tbody");
+    if (!tabla) return;
+
+    // Lista completa de estudiantes
+    const estudiantes = [
+        { nombre: "Rein", edad: 25, genero: "Masculino", progreso: 95 },
+        { nombre: "Subaru", edad: 18, genero: "Masculino", progreso: 80 },
+        { nombre: "Clain", edad: 28, genero: "Masculino", progreso: 89 },
+        { nombre: "Lloyd", edad: 26, genero: "Masculino", progreso: 85 },
+        { nombre: "Rem", edad: 19, genero: "Femenino", progreso: 92 },
+        { nombre: "Emilia", edad: 20, genero: "Femenino", progreso: 88 }
+    ];
+
+    function mostrarEstudiantes() {
+        tabla.innerHTML = "";
+        estudiantes.forEach(function (estudiante) {
+            const fila = document.createElement("tr");
+            [estudiante.nombre, estudiante.edad, estudiante.genero, estudiante.progreso + "%"]
+                .forEach(function (dato) {
+                    const celda = document.createElement("td");
+                    celda.textContent = dato;
+                    fila.appendChild(celda);
+                });
+            tabla.appendChild(fila);
+        });
+    }
+
+    mostrarEstudiantes();
+}
+
+
+// 5. ANUNCIOS
+function iniciarAnuncios() {
+    const anuncio = document.querySelector(".highlight-section");
+    if (anuncio) {
+        anuncio.style.cursor = "pointer";
+        anuncio.addEventListener("click", function () {
+            alert("¡Tenemos información sobre nuestros cursos! Si deseas inscribirte, completa el formulario de registro.");
+        });
+    }
 }
 
 
 // 6. ANIMACIONES DE LAS TARJETAS
 function iniciarAnimaciones() {
     const tarjetas = document.querySelectorAll(".card");
-
     tarjetas.forEach(function (tarjeta) {
-        tarjeta.style.transition = "transform 0.2s ease";
-
         tarjeta.addEventListener("mouseenter", function () {
-            tarjeta.style.transform = "translateY(-5px)";
+            tarjeta.style.transform = "translateY(-12px)";
         });
-
         tarjeta.addEventListener("mouseleave", function () {
             tarjeta.style.transform = "translateY(0)";
         });

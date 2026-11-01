@@ -1,0 +1,393 @@
+/* ============================================================
+   MUNDO EDITA - Estilos del Chatbot
+   Widget flotante con pestañas (Chat / Cursos / Contacto)
+   ============================================================ */
+
+/* ---------- Botón flotante ---------- */
+.chat-lanzador {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 62px;
+  height: 62px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.7em;
+  line-height: 1;
+  color: var(--fondo-oscuro);
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), 0 0 35px rgba(255, 0, 229, 0.35);
+  z-index: 2000;
+  transition: transform 0.25s ease;
+}
+
+.chat-lanzador:hover {
+  transform: scale(1.08);
+}
+
+.chat-lanzador.oculto {
+  display: none;
+}
+
+/* ---------- Panel ---------- */
+.chat-panel {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 380px;
+  max-width: calc(100vw - 30px);
+  height: 580px;
+  max-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  background: var(--fondo-tarjeta);
+  border: 2px solid transparent;
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  z-index: 2001;
+  background-image:
+    linear-gradient(var(--fondo-tarjeta), var(--fondo-tarjeta)),
+    linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.2), 0 0 60px rgba(255, 0, 229, 0.12);
+}
+
+.chat-panel.oculto {
+  display: none;
+}
+
+/* ---------- Encabezado ---------- */
+.chat-encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(255, 0, 229, 0.12));
+  border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.chat-marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.95em;
+  color: var(--fondo-oscuro);
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+  box-shadow: var(--sombra-neon-mix);
+  flex-shrink: 0;
+}
+
+.chat-marca-texto .chat-nombre {
+  font-weight: bold;
+  color: var(--color-blanco);
+  font-size: 0.98em;
+}
+
+.chat-modo {
+  font-size: 0.72em;
+  color: #9aa;
+}
+
+.chat-modo.ia {
+  color: #39ff14;
+}
+
+.chat-cerrar {
+  background: transparent;
+  border: none;
+  color: var(--color-primario);
+  font-size: 1.1em;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.chat-cerrar:hover {
+  background: rgba(0, 240, 255, 0.15);
+}
+
+/* ---------- Pestañas del chat ---------- */
+.chat-pestanas {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+.chat-tab {
+  flex: 1;
+  padding: 11px 6px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #9aa;
+  font-weight: bold;
+  font-size: 0.88em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--fuente-texto);
+}
+
+.chat-tab:hover {
+  color: var(--color-primario);
+}
+
+.chat-tab.activo {
+  color: var(--color-primario);
+  border-bottom-color: var(--color-primario);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+/* ---------- Cuerpo / vistas ---------- */
+.chat-cuerpo {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.chat-vista {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  padding: 14px;
+  overflow-y: auto;
+}
+
+.chat-vista.activo {
+  display: flex;
+}
+
+/* ---------- Mensajes ---------- */
+.chat-mensajes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.chat-mensaje {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.9em;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--fuente-texto);
+}
+
+.chat-mensaje.bot {
+  align-self: flex-start;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--color-texto);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-mensaje.usuario {
+  align-self: flex-end;
+  background: linear-gradient(135deg, rgba(255, 0, 229, 0.2), rgba(138, 43, 226, 0.2));
+  border: 1px solid rgba(255, 0, 229, 0.35);
+  color: var(--color-blanco);
+  border-bottom-right-radius: 4px;
+}
+
+.chat-mensaje.escribiendo {
+  font-style: italic;
+  color: #9aa;
+}
+
+.chat-mensaje a {
+  color: var(--color-primario);
+}
+
+/* ---------- Sugerencias ---------- */
+.chat-sugerencias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.chat-chip {
+  padding: 7px 13px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  background: transparent;
+  color: var(--color-primario);
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--fuente-texto);
+}
+
+.chat-chip:hover {
+  background: var(--color-primario);
+  color: var(--fondo-oscuro);
+  box-shadow: var(--sombra-neon-azul);
+}
+
+/* ---------- Formulario ---------- */
+.chat-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.chat-form input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 20px;
+  border: 2px solid rgba(0, 240, 255, 0.3);
+  background: rgba(10, 10, 15, 0.8);
+  color: var(--color-texto);
+  font-size: 0.9em;
+  font-family: var(--fuente-texto);
+}
+
+.chat-form input:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.12);
+}
+
+.chat-form button {
+  width: 46px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: var(--fondo-oscuro);
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+  box-shadow: var(--sombra-neon-mix);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.chat-form button:hover {
+  transform: scale(1.06);
+}
+
+.chat-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------- Vista Cursos ---------- */
+.chat-vista-titulo {
+  color: var(--color-primario);
+  font-size: 1em;
+  margin-bottom: 6px;
+}
+
+.chat-vista-ayuda {
+  color: #9aa;
+  font-size: 0.82em;
+  margin-bottom: 12px;
+}
+
+.chat-curso-item {
+  text-align: left;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: rgba(138, 43, 226, 0.05);
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+  transition: all 0.2s ease;
+}
+
+.chat-curso-item:hover {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.chat-curso-item .chat-curso-nombre {
+  color: var(--color-blanco);
+  font-weight: bold;
+  font-size: 0.9em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.chat-curso-item .chat-curso-meta {
+  color: var(--color-secundario);
+  font-size: 0.78em;
+}
+
+/* ---------- Vista Contacto ---------- */
+.chat-contacto-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.chat-opcion {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  border-radius: 22px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9em;
+  cursor: pointer;
+  border: 2px solid var(--color-primario);
+  color: var(--color-primario);
+  background: transparent;
+  transition: all 0.2s ease;
+  font-family: var(--fuente-texto);
+}
+
+.chat-opcion:hover {
+  background: var(--color-primario);
+  color: var(--fondo-oscuro);
+  box-shadow: var(--sombra-neon-azul);
+}
+
+.chat-opcion.whatsapp {
+  border-color: #39ff14;
+  color: #39ff14;
+}
+
+.chat-opcion.whatsapp:hover {
+  background: #39ff14;
+  color: var(--fondo-oscuro);
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .chat-panel {
+    right: 10px;
+    bottom: 10px;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 20px);
+    max-height: none;
+  }
+
+  .chat-lanzador {
+    right: 15px;
+    bottom: 15px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.4em;
+  }
+}

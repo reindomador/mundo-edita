@@ -1,2 +1,4 @@
-mongosh-2.12.0-win32-x64/
-node_modules/
+node_modules
+.env
+.DS_Store
+*.zip
