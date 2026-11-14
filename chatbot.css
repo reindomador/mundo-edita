@@ -17,7 +17,7 @@
   line-height: 1;
   color: var(--fondo-oscuro);
   background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-secundario) 100%);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), 0 0 35px rgba(255, 0, 229, 0.35);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
   z-index: 2000;
   transition: transform 0.25s ease;
 }
@@ -51,7 +51,7 @@
     linear-gradient(135deg, var(--color-primario), var(--color-secundario));
   background-origin: border-box;
   background-clip: padding-box, border-box;
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.2), 0 0 60px rgba(255, 0, 229, 0.12);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.50);
 }
 
 .chat-panel.oculto {
@@ -64,8 +64,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(255, 0, 229, 0.12));
-  border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+  background: linear-gradient(135deg, rgba(78, 201, 232, 0.12), rgba(239, 143, 185, 0.12));
+  border-bottom: 1px solid rgba(78, 201, 232, 0.2);
 }
 
 .chat-marca {
@@ -85,7 +85,7 @@
   font-size: 0.95em;
   color: var(--fondo-oscuro);
   background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
-  box-shadow: var(--sombra-neon-mix);
+  box-shadow: var(--sombra-suave-fuerte);
   flex-shrink: 0;
 }
 
@@ -97,11 +97,11 @@
 
 .chat-modo {
   font-size: 0.72em;
-  color: #9aa;
+  color: #8f9aad;
 }
 
 .chat-modo.ia {
-  color: #39ff14;
+  color: #55d6a0;
 }
 
 .chat-cerrar {
@@ -116,13 +116,13 @@
 }
 
 .chat-cerrar:hover {
-  background: rgba(0, 240, 255, 0.15);
+  background: rgba(78, 201, 232, 0.15);
 }
 
 /* ---------- Pestañas del chat ---------- */
 .chat-pestanas {
   display: flex;
-  border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+  border-bottom: 1px solid rgba(78, 201, 232, 0.15);
 }
 
 .chat-tab {
@@ -131,7 +131,7 @@
   background: transparent;
   border: none;
   border-bottom: 2px solid transparent;
-  color: #9aa;
+  color: #8f9aad;
   font-weight: bold;
   font-size: 0.88em;
   cursor: pointer;
@@ -146,7 +146,6 @@
 .chat-tab.activo {
   color: var(--color-primario);
   border-bottom-color: var(--color-primario);
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
 }
 
 /* ---------- Cuerpo / vistas ---------- */
@@ -191,23 +190,23 @@
 
 .chat-mensaje.bot {
   align-self: flex-start;
-  background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.25);
+  background: rgba(78, 201, 232, 0.08);
+  border: 1px solid rgba(78, 201, 232, 0.25);
   color: var(--color-texto);
   border-bottom-left-radius: 4px;
 }
 
 .chat-mensaje.usuario {
   align-self: flex-end;
-  background: linear-gradient(135deg, rgba(255, 0, 229, 0.2), rgba(138, 43, 226, 0.2));
-  border: 1px solid rgba(255, 0, 229, 0.35);
+  background: linear-gradient(135deg, rgba(239, 143, 185, 0.2), rgba(155, 140, 245, 0.2));
+  border: 1px solid rgba(239, 143, 185, 0.35);
   color: var(--color-blanco);
   border-bottom-right-radius: 4px;
 }
 
 .chat-mensaje.escribiendo {
   font-style: italic;
-  color: #9aa;
+  color: #8f9aad;
 }
 
 .chat-mensaje a {
@@ -225,7 +224,7 @@
 .chat-chip {
   padding: 7px 13px;
   border-radius: 20px;
-  border: 1px solid rgba(0, 240, 255, 0.4);
+  border: 1px solid rgba(78, 201, 232, 0.4);
   background: transparent;
   color: var(--color-primario);
   font-size: 0.8em;
@@ -237,7 +236,7 @@
 .chat-chip:hover {
   background: var(--color-primario);
   color: var(--fondo-oscuro);
-  box-shadow: var(--sombra-neon-azul);
+  box-shadow: var(--sombra-suave);
 }
 
 /* ---------- Formulario ---------- */
@@ -251,8 +250,8 @@
   flex: 1;
   padding: 12px 14px;
   border-radius: 20px;
-  border: 2px solid rgba(0, 240, 255, 0.3);
-  background: rgba(10, 10, 15, 0.8);
+  border: 2px solid rgba(78, 201, 232, 0.3);
+  background: rgba(14, 18, 25, 0.8);
   color: var(--color-texto);
   font-size: 0.9em;
   font-family: var(--fuente-texto);
@@ -261,7 +260,7 @@
 .chat-form input:focus {
   outline: none;
   border-color: var(--color-primario);
-  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(78, 201, 232, 0.18);
 }
 
 .chat-form button {
@@ -272,7 +271,7 @@
   font-size: 1.1em;
   color: var(--fondo-oscuro);
   background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
-  box-shadow: var(--sombra-neon-mix);
+  box-shadow: var(--sombra-suave-fuerte);
   transition: transform 0.2s ease;
   flex-shrink: 0;
 }
@@ -295,7 +294,7 @@
 }
 
 .chat-vista-ayuda {
-  color: #9aa;
+  color: #8f9aad;
   font-size: 0.82em;
   margin-bottom: 12px;
 }
@@ -307,8 +306,8 @@
   margin-bottom: 10px;
   border-radius: 12px;
   cursor: pointer;
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  background: rgba(138, 43, 226, 0.05);
+  border: 1px solid rgba(78, 201, 232, 0.2);
+  background: rgba(155, 140, 245, 0.05);
   color: var(--color-texto);
   font-family: var(--fuente-texto);
   transition: all 0.2s ease;
@@ -316,7 +315,7 @@
 
 .chat-curso-item:hover {
   border-color: var(--color-primario);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
 }
 
 .chat-curso-item .chat-curso-nombre {
@@ -359,18 +358,18 @@
 .chat-opcion:hover {
   background: var(--color-primario);
   color: var(--fondo-oscuro);
-  box-shadow: var(--sombra-neon-azul);
+  box-shadow: var(--sombra-suave);
 }
 
 .chat-opcion.whatsapp {
-  border-color: #39ff14;
-  color: #39ff14;
+  border-color: #55d6a0;
+  color: #55d6a0;
 }
 
 .chat-opcion.whatsapp:hover {
-  background: #39ff14;
+  background: #55d6a0;
   color: var(--fondo-oscuro);
-  box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
 }
 
 /* ---------- Responsive ---------- */
