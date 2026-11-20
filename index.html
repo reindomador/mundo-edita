@@ -43,7 +43,8 @@
         <h2 class="propuesta-titulo">¿Para quién es Mundo Edita?</h2>
         <p class="propuesta-texto">Ayudamos a jóvenes de 16 a 28 años que quieren tomar y editar fotos que se vean
           profesionales —para su marca personal, sus redes o su emprendimiento— a lograrlo con un curso completo de 9
-          meses y 48 clases, guiado por Rein Domador, fotógrafo y editor con más de 8 años de experiencia. Empiezas
+          meses y 48 clases, guiado por Nicolás Capera y Naiovy, fotógrafos y editores con más de 8 años de experiencia.
+          Empiezas
           desde cero y funciona igual con tu celular o con una cámara. A diferencia de los tutoriales sueltos de
           internet, aquí tienes un plan paso a paso, feedback personalizado y certificado al terminar.</p>
         <ul class="propuesta-puntos">
@@ -392,9 +393,14 @@
         <p class="registration-description">¡Asegura tu lugar en nuestros cursos!</p>
         <div class="registration-form">
           <form id="registrationForm">
+            <input type="hidden" id="course" name="course" value="Fotografía &amp; Edición de Fotos">
             <div class="form-group">
               <label for="name">Nombre:</label>
               <input type="text" id="name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico:</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
             </div>
             <div class="form-group">
               <label for="phone">Número de Teléfono:</label>
@@ -457,6 +463,7 @@
   </div>
 
   <script src="catalog.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
   <script src="chatbot.js"></script>
 </body>

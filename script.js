@@ -1,3 +1,8 @@
+const supabaseClient = window.supabase?.createClient(
+    "https://covhskrfzbxvqeansydu.supabase.co",
+    "sb_publishable_NfugEcJyrHuhReHg2q7ETw__k4RXHMy"
+) || null;
+
 document.addEventListener("DOMContentLoaded", function () {
     iniciarTabs();
     iniciarCursos();
@@ -55,10 +60,14 @@ function iniciarCursos() {
 
             const mensaje = document.getElementById("message");
             if (mensaje) {
+                mensaje.className = "";
                 mensaje.textContent =
                     "Te interesa el curso de " + titulo + ". Completa tus datos para continuar.";
                 mensaje.style.color = "var(--color-primario)";
             }
+
+            const cursoInput = document.getElementById("course");
+            if (cursoInput) cursoInput.value = titulo;
 
             const registro = document.getElementById("registro");
             if (registro) {
@@ -77,14 +86,17 @@ function iniciarRegistro() {
     if (!formulario) return;
 
     const nombreInput = document.getElementById("name");
+    const correoInput = document.getElementById("email");
     const telefonoInput = document.getElementById("phone");
     const mensaje = document.getElementById("message");
 
-    formulario.addEventListener("submit", function (e) {
+    formulario.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const nombreIngresado = nombreInput.value.trim();
+        const correoIngresado = correoInput.value.trim();
         const telefonoIngresado = telefonoInput.value.trim();
+        const cursoIngresado = document.getElementById("course")?.value || "Fotografía & Edición de Fotos";
         const numeros = telefonoIngresado.replace(/\D/g, "");
 
         if (nombreIngresado === "") {
@@ -101,6 +113,13 @@ function iniciarRegistro() {
             return;
         }
 
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoIngresado)) {
+            mensaje.textContent = "Escribe un correo electrónico válido.";
+            mensaje.style.color = "#ff4d4d";
+            correoInput.focus();
+            return;
+        }
+
         if (!/^[0-9+\s()-]+$/.test(telefonoIngresado) ||
             numeros.length < 7 || numeros.length > 15) {
             mensaje.textContent = "Escribe un número de teléfono válido.";
@@ -109,11 +128,51 @@ function iniciarRegistro() {
             return;
         }
 
-        mensaje.className = "success-message";
-        mensaje.style.color = "#00ff88";
-        mensaje.innerHTML = `<p class="success-text">Gracias ${nombreIngresado}! Te has registrado exitosamente cualquier duda contactanos en el soporte te contactaremos en ${telefonoIngresado} Ten un buen día :V </p>`;
+        if (!supabaseClient) {
+            mensaje.textContent = "No se pudo conectar con el servicio. Recarga la página e inténtalo de nuevo.";
+            mensaje.style.color = "#ef8fb9";
+            return;
+        }
 
-        this.reset();
+        const botonEnviar = formulario.querySelector('button[type="submit"]');
+        botonEnviar.disabled = true;
+        botonEnviar.textContent = "Enviando...";
+        mensaje.className = "";
+        mensaje.textContent = "Guardando tus datos...";
+        mensaje.style.color = "var(--color-primario)";
+
+        try {
+            const { error } = await supabaseClient
+                .from("leads")
+                .insert([{
+                    nombre: nombreIngresado,
+                    correo: correoIngresado,
+                    telefono: telefonoIngresado,
+                    curso: cursoIngresado
+                }]);
+
+            if (error) throw error;
+
+            mensaje.className = "success-message";
+            mensaje.textContent = `¡Gracias, ${nombreIngresado}! Tus datos se guardaron correctamente. Nos pondremos en contacto contigo.`;
+            mensaje.style.color = "";
+            formulario.reset();
+        } catch (error) {
+            console.error("Error al guardar el registro en Supabase:", error);
+            const detalleError = (error?.message || "").toLowerCase();
+
+            if (error?.code === "PGRST204" || (detalleError.includes("column") && detalleError.includes("schema cache"))) {
+                mensaje.textContent = "Falta la columna correo en Supabase. En SQL Editor ejecuta: ALTER TABLE public.leads ADD COLUMN IF NOT EXISTS correo TEXT;";
+            } else if (error?.code === "42501" || detalleError.includes("row-level security")) {
+                mensaje.textContent = "Supabase bloqueó el registro. Hay que revisar la política RLS de inserción en la tabla leads.";
+            } else {
+                mensaje.textContent = "No pudimos guardar tus datos. Revisa en Supabase que exista la tabla public.leads y que permita inserciones.";
+            }
+            mensaje.style.color = "#ef8fb9";
+        } finally {
+            botonEnviar.disabled = false;
+            botonEnviar.textContent = "Registrarse";
+        }
     });
 }
 
