@@ -21,7 +21,12 @@
       <ul class="nav-links">
         <li><button class="tab-btn activo" data-tab="inicio">Inicio</button></li>
         <li><button class="tab-btn" data-tab="cursos">Cursos</button></li>
+        <li><button class="tab-btn" data-tab="estudiantes">Estudiantes</button></li>
         <li><button class="tab-btn" data-tab="contacto">Contacto</button></li>
+        <li><button class="tab-btn" data-tab="perfil">
+            <img id="nav-perfil-avatar" class="nav-avatar" alt="" hidden>
+            <span id="nav-perfil-texto">Mi Perfil</span>
+          </button></li>
       </ul>
     </nav>
   </header>
@@ -163,7 +168,8 @@
             </div>
 
             <div class="curso-destacado-acciones">
-              <button class="curso-inscribirse-btn" data-tab="contacto" data-scroll="registro">🔥 Inscribirme
+              <button class="curso-inscribirse-btn" data-tab="perfil" data-scroll="solicitud-inscripcion"
+                data-curso="Fotografía &amp; Edición de Fotos">🔥 Inscribirme
                 Ahora</button>
               <button class="curso-ver-mas-btn" data-tab="cursos">Ver Todos los Cursos</button>
             </div>
@@ -378,6 +384,33 @@
     </div>
   </section>
 
+  <!-- ================= PESTAÑA: ESTUDIANTES ================= -->
+  <section class="tab-panel" data-panel="estudiantes">
+    <div class="container directorio-container">
+      <header class="directorio-encabezado">
+        <span class="directorio-kicker">COMUNIDAD MUNDO EDITA</span>
+        <h1>Conoce a otros estudiantes</h1>
+        <p>Explora los perfiles que sus estudiantes eligieron compartir públicamente.</p>
+      </header>
+
+      <div class="directorio-buscador">
+        <label for="buscar-perfiles">Buscar por nombre o intereses</label>
+        <div class="buscador-campo">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="10.8" cy="10.8" r="6.8"></circle>
+            <path d="m16 16 5 5"></path>
+          </svg>
+          <input id="buscar-perfiles" type="search" placeholder="Ej: fotografía, edición..." autocomplete="off">
+          <button id="directorio-recargar" type="button">Actualizar</button>
+        </div>
+        <p id="directorio-estado" class="directorio-estado" aria-live="polite">Perfiles públicos de la comunidad</p>
+      </div>
+
+      <div id="directorio-perfiles" class="directorio-grid"></div>
+      <div id="directorio-vacio" class="directorio-vacio" role="status" hidden></div>
+    </div>
+  </section>
+
   <!-- ================= PESTAÑA: CONTACTO ================= -->
   <section class="tab-panel" data-panel="contacto">
     <div class="container">
@@ -389,8 +422,10 @@
       </div>
 
       <div class="registration-section" id="registro">
-        <h2 class="registration-title">Regístrate Aquí</h2>
-        <p class="registration-description">¡Asegura tu lugar en nuestros cursos!</p>
+        <h2 class="registration-title">Solicita información</h2>
+        <p class="registration-description">Déjanos tus datos y nos pondremos en contacto contigo.</p>
+        <button type="button" class="curso-inscribirse-btn" data-tab="perfil"
+          data-scroll="solicitud-inscripcion">Iniciar solicitud de inscripción</button>
         <div class="registration-form">
           <form id="registrationForm">
             <input type="hidden" id="course" name="course" value="Fotografía &amp; Edición de Fotos">
@@ -406,11 +441,123 @@
               <label for="phone">Número de Teléfono:</label>
               <input type="tel" id="phone" name="phone">
             </div>
-            <button type="submit" class="submit-btn">Registrarse</button>
+            <button type="submit" class="submit-btn">Enviar consulta</button>
           </form>
           <div id="message"></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= PESTAÑA: MI PERFIL ================= -->
+  <section class="tab-panel" data-panel="perfil">
+    <div class="container">
+
+      <!-- Vista sin sesión -->
+      <div class="perfil-login" id="perfil-login">
+        <h2 class="section-title">Tu Perfil</h2>
+        <p class="perfil-intro">Entra con tu cuenta de Google para crear tu perfil: sube tu foto, elige cómo quieres que
+          te llamen y decide si tu perfil es privado o público.</p>
+        <button id="btn-google" class="google-btn" type="button">
+          <span class="google-icon">G</span> Conectar con Google
+        </button>
+        <p class="perfil-aviso" id="perfil-aviso"></p>
+      </div>
+
+      <!-- Vista con sesión -->
+      <div class="perfil-panel" id="perfil-panel" hidden>
+        <div class="perfil-titulo">
+          <div>
+            <span class="perfil-kicker">MUNDO EDITA · ESPACIO PERSONAL</span>
+            <h2>Tu perfil</h2>
+            <p>Personaliza cómo te ven y mantén tus datos al día.</p>
+          </div>
+          <span class="perfil-estado"><span aria-hidden="true"></span> Cuenta conectada</span>
+        </div>
+
+        <div class="perfil-encabezado">
+          <div class="perfil-avatar-wrap">
+            <img id="perfil-avatar-img" class="perfil-avatar" alt="Foto de perfil" hidden>
+            <div id="perfil-avatar-inicial" class="perfil-avatar-inicial"></div>
+            <label class="perfil-avatar-btn" for="perfil-foto">Cambiar foto</label>
+            <input type="file" id="perfil-foto" accept="image/png,image/jpeg,image/webp" hidden>
+          </div>
+          <div class="perfil-datos">
+            <div class="perfil-nombre-google" id="perfil-nombre-google"></div>
+            <div class="perfil-correo" id="perfil-correo"></div>
+            <button id="btn-salir" class="perfil-salir" type="button">Cerrar sesión</button>
+          </div>
+        </div>
+
+        <form id="perfil-form" class="perfil-form">
+          <div class="perfil-form-titulo">
+            <div>
+              <span class="perfil-kicker">TUS DATOS</span>
+              <h3>Información personal</h3>
+            </div>
+            <p>Puedes actualizarla cuando quieras.</p>
+          </div>
+          <div class="form-group">
+            <label for="perfil-mostrar">¿Cómo te gusta que te llamen?</label>
+            <input type="text" id="perfil-mostrar" maxlength="40" placeholder="Ej: Rein, Naiovy, Subaru...">
+          </div>
+          <div class="form-group">
+            <label for="perfil-bio">Sobre ti</label>
+            <textarea id="perfil-bio" maxlength="280" rows="3"
+              placeholder="Cuéntanos algo de ti o de lo que quieres aprender..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="perfil-telefono">Teléfono / WhatsApp (opcional)</label>
+            <input type="tel" id="perfil-telefono" placeholder="Ej: 320 300 7637">
+          </div>
+          <div class="form-group perfil-visibilidad">
+            <label class="switch" for="perfil-publico">
+              <input type="checkbox" id="perfil-publico">
+              <span class="slider"></span>
+            </label>
+            <span>Perfil público — otros estudiantes podrán verlo. Si lo dejas apagado, tu perfil es privado.</span>
+          </div>
+          <button type="submit" class="submit-btn">Guardar cambios</button>
+        </form>
+        <div id="perfil-mensaje"></div>
+
+        <section class="inscripciones-panel" id="solicitud-inscripcion">
+          <div class="inscripciones-titulo">
+            <span class="perfil-kicker">SIGUIENTE PASO</span>
+            <h3>Inscripción a cursos</h3>
+            <p>Envía tu solicitud y revisa aquí la respuesta del equipo.</p>
+          </div>
+          <p class="inscripciones-login" id="inscripciones-login" hidden>Conecta tu cuenta para solicitar un cupo.</p>
+          <form id="inscripcion-form" class="inscripcion-form" hidden>
+            <label for="inscripcion-curso">¿A qué curso quieres inscribirte?</label>
+            <div class="inscripcion-form-fila">
+              <select id="inscripcion-curso" required>
+                <option value="">Selecciona un curso</option>
+                <option>Fotografía &amp; Edición de Fotos</option>
+                <option>Efectos Visuales VFX</option>
+                <option>Colorización &amp; Color Grading</option>
+                <option>Motion Graphics</option>
+                <option>Audio Profesional para Vídeo</option>
+                <option>Edición Avanzada &amp; Workflow</option>
+              </select>
+              <button type="submit" class="inscripcion-enviar">Solicitar cupo</button>
+            </div>
+          </form>
+          <p class="inscripciones-mensaje" id="inscripciones-mensaje" aria-live="polite"></p>
+          <div class="mis-inscripciones">
+            <h4>Mis solicitudes y cursos</h4>
+            <div id="mis-inscripciones-lista" class="inscripciones-lista" aria-live="polite"></div>
+          </div>
+          <section id="admin-inscripciones" class="admin-inscripciones" hidden>
+            <div class="inscripciones-titulo">
+              <span class="perfil-kicker">ADMINISTRACIÓN</span>
+              <h3>Solicitudes por revisar</h3>
+            </div>
+            <div id="admin-inscripciones-lista" class="inscripciones-lista" aria-live="polite"></div>
+          </section>
+        </section>
+      </div>
+
     </div>
   </section>
 
