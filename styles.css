@@ -2173,3 +2173,303 @@ textarea:focus {
     flex: 1;
   }
 }
+
+@media (max-width: 768px) {
+  .header {
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .logo {
+    width: 54px;
+    height: 54px;
+  }
+
+  .nav-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: min(100%, 560px);
+    margin: 0 auto;
+  }
+
+  .nav-links li {
+    width: auto;
+  }
+
+  .nav-links .tab-btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 9px 8px;
+    font-size: 0.82em;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .container {
+    padding: 52px 18px;
+  }
+
+  .section-title {
+    margin-bottom: 34px;
+    font-size: clamp(1.7rem, 6vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  .hero {
+    padding: 56px 18px 48px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.35rem, 9vw, 3.5rem);
+    line-height: 1.05;
+  }
+
+  .hero .hero-tagline {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .directorio-encabezado h1 {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  .perfil-login,
+  .perfil-panel {
+    width: 100%;
+  }
+
+  .card:hover,
+  .directorio-tarjeta:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 9px 12px;
+  }
+
+  .logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-links .tab-btn {
+    min-height: 44px;
+    padding: 8px 5px;
+    font-size: 0.76em;
+  }
+
+  .container {
+    padding: 40px 14px;
+  }
+
+  .section-title {
+    margin-bottom: 28px;
+    font-size: 1.7rem;
+  }
+
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th,
+  td {
+    padding: 12px 14px;
+  }
+
+  .hero {
+    padding: 46px 16px 40px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.15rem, 10vw, 2.8rem);
+  }
+
+  .hero-btn {
+    width: min(100%, 280px);
+    min-height: 48px;
+    padding: 13px 20px;
+  }
+
+  .propuesta-valor {
+    margin-bottom: 38px;
+    padding: 24px 17px;
+  }
+
+  .propuesta-puntos {
+    grid-template-columns: 1fr;
+  }
+
+  .curso-destacado {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .curso-destacado-img {
+    min-height: 180px;
+  }
+
+  .curso-destacado-meta {
+    gap: 7px;
+  }
+
+  .meta-tag {
+    padding: 6px 10px;
+    font-size: 0.78em;
+  }
+
+  .detalle-columna,
+  .curso-destacado-instructor {
+    padding: 15px;
+  }
+
+  .instructor-info {
+    min-width: 0;
+  }
+
+  .instructor-rating {
+    width: 100%;
+  }
+
+  .curso-destacado-acciones {
+    gap: 10px;
+  }
+
+  .curso-inscribirse-btn,
+  .curso-ver-mas-btn {
+    min-width: 0;
+    min-height: 48px;
+    padding: 13px 16px;
+    font-size: 0.96em;
+  }
+
+  .card-image {
+    height: 170px;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 1.35em;
+  }
+
+  .registration-section {
+    margin-top: 48px;
+    padding: 25px 16px;
+  }
+
+  .registration-title {
+    font-size: 1.8em;
+  }
+
+  .registration-description {
+    margin-bottom: 24px;
+  }
+
+  input,
+  textarea,
+  select {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .submit-btn,
+  .google-btn,
+  .card-btn {
+    min-height: 48px;
+  }
+
+  .perfil-login {
+    padding: 30px 18px;
+    border-radius: 20px;
+  }
+
+  .perfil-encabezado {
+    padding: 20px 16px;
+  }
+
+  .perfil-form {
+    padding: 20px 16px;
+  }
+
+  #perfil-form .submit-btn {
+    width: 100%;
+  }
+
+  .directorio-buscador {
+    padding: 14px;
+  }
+
+  .buscador-campo {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 8px 10px;
+    padding: 10px 12px;
+  }
+
+  .buscador-campo input {
+    width: 100%;
+  }
+
+  .buscador-campo button {
+    grid-column: 2;
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .directorio-tarjeta {
+    padding: 16px;
+  }
+
+  .inscripciones-panel {
+    margin-bottom: 48px;
+    padding: 18px 14px;
+  }
+
+  .inscripciones-titulo h3,
+  .mis-inscripciones h4 {
+    font-size: 1.12rem;
+  }
+
+  .inscripcion-form select,
+  .inscripcion-enviar {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .inscripcion-tarjeta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    padding: 14px;
+  }
+
+  .inscripcion-estado {
+    white-space: nowrap;
+  }
+
+  .inscripcion-acciones {
+    grid-column: 1 / -1;
+  }
+
+  .inscripcion-acciones button {
+    min-height: 44px;
+  }
+}

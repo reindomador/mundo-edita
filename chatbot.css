@@ -375,18 +375,36 @@
 /* ---------- Responsive ---------- */
 @media (max-width: 480px) {
   .chat-panel {
-    right: 10px;
-    bottom: 10px;
-    width: calc(100vw - 20px);
-    height: calc(100vh - 20px);
-    max-height: none;
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: calc(100vw - 24px);
+    height: calc(100vh - 24px);
+    max-height: calc(100vh - 24px);
+    height: calc(100dvh - max(24px, env(safe-area-inset-top) + env(safe-area-inset-bottom)));
+    max-height: calc(100dvh - max(24px, env(safe-area-inset-top) + env(safe-area-inset-bottom)));
+  }
+
+  .chat-vista {
+    padding: 12px;
+  }
+
+  .chat-tab,
+  .chat-cerrar,
+  .chat-borrar,
+  .chat-form button {
+    min-height: 44px;
   }
 
   .chat-lanzador {
-    right: 15px;
-    bottom: 15px;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
     width: 50px;
     height: 50px;
     font-size: 1.4em;
+  }
+
+  .chat-form input {
+    min-height: 48px;
+    font-size: 16px;
   }
 }
